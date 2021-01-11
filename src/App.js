@@ -15,6 +15,7 @@ const App = ()=> {
       <div class = 'app-wrapper-content'>
           <Route path='/Messages' component = {Dialogs}/>
           <Route path='/Profile' component = {Profile}/>
+          <Route exact path='/' component = {Profile}/>
       </div>
 
     </div>

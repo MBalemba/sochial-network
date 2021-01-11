@@ -1,9 +1,56 @@
-.header {
-  grid-area: h;
-  background-color: #3e7fb0;
-  border-radius: 0px 0px 10px 10px;
+.grid{
+    min-height: 100%;
+    display: grid;
+    /*background-color: #3e7fb0;*/
+    grid-template-columns: 3fr 7fr;
 }
 
-.header img {
-  height: 30px;
+.leftSide{
+ /*background-color: mediumvioletred;*/
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.search{
+    height: 10%;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.input input{
+    display: inline-block;
+}
+
+.input{
+    display: block;
+    height: 200px;
+    width: inherit;
+    text-align: center;
+    vertical-align: middle;
+}
+.input span{
+
+}
+
+
+.Meseges{
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    overflow: scroll;
+    height: 500px;
+    width: 90%;
+}
+
+.Meseges::-webkit-scrollbar{
+    height: 0px;
+}
+
+.rightSide{
+    /*background-color: orangered;*/
+    background-color: #e5e5e5;
 }

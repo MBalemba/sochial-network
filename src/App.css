@@ -1,5 +1,17 @@
-body{
 
+html, body{
+  display: block;
+  min-height: 100%
+}
+
+input:focus{
+  border: none;
+
+}
+
+
+body{
+    min-height: 100vh;
     background-color: #e5e5e5;
 }
 a{
@@ -9,7 +21,7 @@ a{
 
 .app-wrapper {
   display: grid;
-
+  min-height: 100vh;
 
   grid-template-areas:
     "h h"
