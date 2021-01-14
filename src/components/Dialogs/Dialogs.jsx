@@ -1,17 +1,26 @@
 import s from './Dialogs.module.css'
 import BlockMessege from "./BlockMessege/BlockMessege";
 import Post from "../Profile/MyPosts/Post/Post";
+import Search from "./search/search";
 
-const Dialogs = (obj) => {
+const Dialogs = (props) => {
+    let dialogsname = props.arr.blockMessege.map((elem) =>{
+        return (
+            <BlockMessege name = {elem.name} id= {elem.id} srck= {elem.srck} />
+    )
+    });
+
+
+
     return(
         <div className={s.grid}>
             <div className={s.leftSide}>
-                <div className={s.search}>
-                    <div className={s.input}><input type="text" placeholder="Поиск" />
-                        <span>sddsds</span>
-                    </div>
-                </div>
+                <Search />
+
                 <div className={s.Meseges}>
+                    {dialogsname}
+
+{/*
 
                     <BlockMessege name="Макс Балемба" id="0" srck="https://sun1-92.userapi.com/impg/Aa9d2TJGoAIu89Q-RpSDKreTzPlDXkPaAZdL7A/LcFwPJVaTYA.jpg?size=100x0&quality=96&crop=558,189,953,953&sign=f4f26965a68cafa07dab7462ccfbb34e&ava=1" />
 
@@ -37,6 +46,7 @@ const Dialogs = (obj) => {
 
                     <BlockMessege name="Артур Амосов" id="3" srck="https://sun1-98.userapi.com/impg/c858436/v858436975/10a9b4/lPJp4Rbly2k.jpg?size=100x0&quality=96&crop=1,704,1120,1120&sign=fbbc356ede90a909b5e98b79b75efaad&ava=1" />
 
+*/}
 
                 </div>
             </div>

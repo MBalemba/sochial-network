@@ -2,6 +2,9 @@ import s from './BlockMessege.module.css';
 import {NavLink} from "react-router-dom";
 
 const BlockMessege = (obj) => {
+
+
+
   return (
     <NavLink to={'/Messages/' + obj.id} class={s.Post}>
       <div class={s.Header}>
