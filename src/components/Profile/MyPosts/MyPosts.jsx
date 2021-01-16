@@ -9,7 +9,7 @@ const MyPosts = (props) => {
   return (
     <div>
 
-        <CreatePost newPostText = {props.profilePage.newPostText} updateNewText = {props.updateNewText} func ={props.func}/>
+        <CreatePost newPostText = {props.profilePage.newPostText} dispatch = {props.dispatch}/>
 
        {props.profilePage.posts.map((elem) =>  <Post obj = {elem} /> )}
 

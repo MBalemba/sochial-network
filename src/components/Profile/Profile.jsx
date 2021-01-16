@@ -6,7 +6,7 @@ const Profile = (props) => {
   return (
     <div className= {s.content}>
       <img class={s.img} src='https://i.ytimg.com/vi/-U0rlGJcgCw/maxresdefault.jpg' />
-      <MyPosts profilePage = {props.profilePage} updateNewText={props.updateNewText} func={ props.func}/>
+      <MyPosts profilePage = {props.profilePage} dispatch = {props.dispatch} />
     </div>
   );
 }

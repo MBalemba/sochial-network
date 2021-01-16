@@ -1,7 +1,7 @@
-
-
+import profileReducer from './profile-reducer'
+import dialogReducer from './dialog-reducer'
 let store = {
-    _data: {
+    _state: {
 
         profilePage: {
             posts: [
@@ -33,6 +33,7 @@ let store = {
                     messege: 'Hello'
                 },
             ],
+
             newPostText: 'post write now...'
         },
 
@@ -60,38 +61,62 @@ let store = {
                     srck: "https://sun1-98.userapi.com/impg/c858436/v858436975/10a9b4/lPJp4Rbly2k.jpg?size=100x0&quality=96&crop=1,704,1120,1120&sign=fbbc356ede90a909b5e98b79b75efaad&ava=1",
                 }
             ],
+
+            messegeContent: [
+                {id: '0', message: 'hi'},
+                {id: '1', message: 'How are you'},
+                {id: '2', message: 'gg'},
+                {id: '3', message: 'wp'}
+            ],
+
+            newMessageBody: ''
+
         },
 
     },
+    subscribe(observer){
+        this._callSubscriber = observer;
+    },
     getData(){
-      return this._data
+      return this._state;
     },
     _callSubscriber() {
         console.log('state was changed')
     },
+
+
     addPost() {
         debugger;
         let newPost = {
             name: "Макс Балемба",
             id: "0",
             srck: "https://sun1-92.userapi.com/impg/Aa9d2TJGoAIu89Q-RpSDKreTzPlDXkPaAZdL7A/LcFwPJVaTYA.jpg?size=100x0&quality=96&crop=558,189,953,953&sign=f4f26965a68cafa07dab7462ccfbb34e&ava=1",
-            messege: this._data.profilePage.newPostText,
+            messege: this._state.profilePage.newPostText,
         }
-        this._data.profilePage.posts.push(newPost);
-        this._data.profilePage.newPostText = '';
+        this._state.profilePage.posts.push(newPost);
+        this._state.profilePage.newPostText = '';
         this._callSubscriber();
     },
     updateNewText (newText){
 
-        this._data.profilePage.newPostText = newText;
+        this._state.profilePage.newPostText = newText;
         this._callSubscriber();
     },
-    subscribe(observer){
-        this._callSubscriber = observer;
-    }
+
+    dispatch(action){
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action);
+        this._callSubscriber();
+
+    },
     //Переопределяет _callSubscriber,
     // присваивая значение функции, которая отрисует компоненты
 }
+
+
+
+
 
 
 

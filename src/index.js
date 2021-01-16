@@ -12,7 +12,7 @@ import store from "./redux/state";
 let renderEntireTree = (state) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App data = {store.getData()} func = {store.addPost.bind(store)} updateNewText = {store.updateNewText.bind(store)}/>
+            <App data = {store.getData()} dispatch = {store.dispatch.bind(store)} />
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -22,6 +22,7 @@ let renderEntireTree = (state) => {
 renderEntireTree(store.getData());
 
 store.subscribe(renderEntireTree);
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

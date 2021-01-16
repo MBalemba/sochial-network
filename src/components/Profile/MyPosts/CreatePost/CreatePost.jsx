@@ -1,16 +1,20 @@
 import s from './CreatePost.module.css';
 import React from 'react';
+import {addPostActionCreator, updatePostTextActionCreator} from "../../../../redux/profile-reducer";
+
+
 
 const CreatePost = (props) => {
     let newPostElement = React.createRef();
+
     let addPost = () => {
-        let text = newPostElement.current.innerHTML;
-        alert(text);
+        props.dispatch(addPostActionCreator())
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewText(text);
+        const newVar = updatePostTextActionCreator(text);
+        props.dispatch(newVar);
     }
   return (
         <div className={s.createPost}>
@@ -47,7 +51,7 @@ const CreatePost = (props) => {
                     <span className>Photo/Video</span>
                 </button>
 
-                <button onClick={() =>{ props.func(newPostElement.current.innerHTML) }} className={s.tag}>
+                <button onClick={addPost} className={s.tag}>
                     <span>Send</span>
                 </button>
 
