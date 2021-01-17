@@ -7,14 +7,15 @@ import {addPostActionCreator, updatePostTextActionCreator} from "../../../../red
 const CreatePost = (props) => {
     let newPostElement = React.createRef();
 
-    let addPost = () => {
-        props.dispatch(addPostActionCreator())
+    let onAddPost = () => {
+        props.addPost();
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        const newVar = updatePostTextActionCreator(text);
-        props.dispatch(newVar);
+        props.updateNewPostText(text);
+        // const newVar = updatePostTextActionCreator(text);
+        // props.dispatch(newVar);
     }
   return (
         <div className={s.createPost}>
@@ -51,7 +52,7 @@ const CreatePost = (props) => {
                     <span className>Photo/Video</span>
                 </button>
 
-                <button onClick={addPost} className={s.tag}>
+                <button onClick={onAddPost} className={s.tag}>
                     <span>Send</span>
                 </button>
 
