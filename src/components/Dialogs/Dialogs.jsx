@@ -5,13 +5,14 @@ import Search from "./search/search";
 import {sendMessegeCreator, updateNewMassageBodyCreator} from "../../redux/dialog-reducer";
 
 const Dialogs = (props) => {
-    let dialogsname = props.arr.blockMessege.map((elem) =>{
+    debugger
+    let dialogsname = props.dialogsPage.blockMessege.map((elem) =>{
         return (
             <BlockMessege name = {elem.name} id= {elem.id} srck= {elem.srck} />
     )
     });
 
-    let messegeContent = props.arr.messegeContent.map((elem) =>{
+    let messegeContent = props.dialogsPage.messegeContent.map((elem) =>{
         return (
             <div>{elem.message}</div>
         )
@@ -46,7 +47,7 @@ const Dialogs = (props) => {
                 <div>
                     <div><textarea
                         onChange={onNewMessageChange}
-                        value={props.arr.newMessageBody}
+                        value={props.dialogsPage.newMessageBody}
                         placeholder="enter your message"></textarea></div>
                     <div><button onClick={onSendMessageClick}>send</button></div>
                 </div>

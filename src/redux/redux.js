@@ -77,7 +77,7 @@ let store = {
     subscribe(observer){
         this._callSubscriber = observer;
     },
-    getData(){
+    getState(){
       return this._state;
     },
     _callSubscriber() {
@@ -97,6 +97,7 @@ let store = {
         this._state.profilePage.newPostText = '';
         this._callSubscriber();
     },
+
     updateNewText (newText){
 
         this._state.profilePage.newPostText = newText;
