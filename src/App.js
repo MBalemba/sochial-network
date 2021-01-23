@@ -15,7 +15,7 @@ const App = (props)=> {
     <div className='app-wrapper'>
       <Header/>
       <Navbar/>
-      <div class = 'app-wrapper-content'>
+      <div onContextMenu={(event) => {event.preventDefault()}} onMouseDown={(e) => {e.preventDefault()}} class = 'app-wrapper-content'>
           <Route path='/Messages' render = { () => <DialogsContainer  dialogsPage={props.state.dialogsPage} dispatch = {props.dispatch}/>} />
           <Route path='/Profile' render = {() => <Profile profilePage ={props.state.profilePage} dispatch = {props.dispatch} />} />
           <Route exact path='/' render = {() => <Profile profilePage={props.state.profilePage} dispatch = {props.dispatch} />}/>
