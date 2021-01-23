@@ -52,7 +52,7 @@ const CreatePost = (props) => {
                     <span className>Photo/Video</span>
                 </button>
 
-                <button onClick={onAddPost} className={s.tag}>
+                <button onClick={props.addPost} className={s.tag}>
                     <span>Send</span>
                 </button>
 

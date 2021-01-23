@@ -37,15 +37,20 @@ const initialState = {
 }
 
 const dialogReducer = (state = initialState, action) => {
-    debugger
+
+
     if (action.type === UPDATE_NEW_MESSAGE_BODY){
-        state.newMessageBody = action.body;
+        return {
+            ...state,
+            newMessageBody: action.body
+        }
     } else
     if (action.type === SEND_MESSAGE){
-        debugger
-        let body = state.newMessageBody;
-        state.newMessageBody = '';
-        state.messegeContent.push({id: '4', message: body});
+        return {
+            ...state,
+            messegeContent: [...state.messegeContent, {id: '4', message: state.newMessageBody}],
+            newMessageBody: ''
+        };
     }
 
 

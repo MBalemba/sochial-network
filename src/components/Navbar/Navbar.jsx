@@ -13,6 +13,10 @@ const Navbar = () => {
       <div>
         <NavLink to = "#">News</NavLink>
       </div>
+        <div>
+        <NavLink to = "/users">Users</NavLink>
+      </div>
+
       <div>
         <NavLink to = "#">Music</NavLink>
       </div>

@@ -1,21 +1,30 @@
-import s from './CreatePost.module.css';
 import React from 'react';
 import {addPostActionCreator, updatePostTextActionCreator} from "../../../../redux/profile-reducer";
 import CreatePost from "./CreatePost";
+import {connect} from "react-redux";
+import Post from "../Post/Post";
+
 
 //Идея контейнерной компоненты, быть оберткой для презентационной, хранит все данные и логику
 
-const CreatePostContainer = (props) => {
-    let addPost = () => {
-        props.dispatch(addPostActionCreator())
-    }
 
-    let onPostChange = (text) => {
-        const newVar = updatePostTextActionCreator(text);
-        props.dispatch(newVar);
+let mapStateToProps = (state) => {
+    return {
+        newPostText: state.profilePage.newPostText,
     }
-  return ( <CreatePost newPostText = {props.newPostText} updateNewPostText = {onPostChange} addPost = {addPost}/>);
+},mapDispatchToProps = (dispatch) => {
+    return {
+        updateNewPostText: (text) => {
+            const newVar = updatePostTextActionCreator(text);
+            dispatch(newVar);
+        },
+        addPost: () => {
+            dispatch(addPostActionCreator());
+        },
+    }
 }
+
+const CreatePostContainer = connect(mapStateToProps, mapDispatchToProps) (CreatePost);
 
 
 export default CreatePostContainer;

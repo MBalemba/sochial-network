@@ -1,6 +1,7 @@
 import s from './Post.module.css';
+import React from "react";
 
-const Post = (obj) => {
+const ComponentPost = (obj) => {
   return (
     <div class={s.Post}>
       <div class={s.Header}>
@@ -24,6 +25,11 @@ const Post = (obj) => {
     </div>
 
   );
+}
+
+
+const Post = (props) => {
+    return props.posts.map((elem) =>  <ComponentPost obj = {elem} /> )
 }
 
 
