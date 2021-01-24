@@ -14,7 +14,8 @@ let Users = (props) => {
         <div>
             <div>
                 {pages.map((el) => {
-                    return <span onClick= {(e) => {e.preventDefault() ;props.onPageChanges(el)}} className={props.currentPage === el && styles.selectedPage}>{el + ' '}</span>
+                    debugger
+                    return <span onClick= {(e) => {e.preventDefault() ;props.onPageChanges(el)}} className={props.currentPage === el ? styles.selectedPage: ''}>{el + ' '}</span>
                 })}
             </div>
 

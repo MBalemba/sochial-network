@@ -1,30 +1,38 @@
 import React from 'react';
-import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "../../redux/user-reducer";
-import {connect} from "react-redux";
-import * as axios from "axios";
-import Users from "./Users";
+import {
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    statePreload,
+    unfollow
+} from "../../redux/user-reducer";
+import {connect} from 'react-redux';
+import * as axios from 'axios';
+import Users from './Users';
+import preloader from '../../assets/image/loader.gif'
+import Preloader from "../common/Preloader";
 
 class UsersAPIComponent extends React.Component{
 
     componentDidMount() {
         debugger
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        this.props.statePreload(true);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${1}&count=${this.props.pageSize}`).then(response => {
             debugger;
-            console.log(response)
+            this.props.statePreload(false);
+            console.log(response);
             this.props.setUsers(response.data.items);
             this.props.setTotalUsersCount(response.data.totalCount);
         })
     }
 
-    component() {
-
-    }
-
     onPageChanges = (pageNumber) => {
-        debugger
+        this.props.statePreload(true);
         this.props.setCurrentPage(pageNumber);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            debugger;
+
+            this.props.statePreload(false);
             console.log(response)
             this.props.setUsers(response.data.items);
 
@@ -34,7 +42,9 @@ class UsersAPIComponent extends React.Component{
 
 
     render() {
-        return (
+        return (<>
+
+            {/*<Preloader isFetching = {this.props.isFetching}/>*/}
             <Users totalUsersCount = { this.props.totalUsersCount}
                    pageSize = {this.props.pageSize}
                    currentPage = {this.props.currentPage}
@@ -44,6 +54,9 @@ class UsersAPIComponent extends React.Component{
                    unfollow = {this.props.unfollow}
 
             />
+
+
+            </>
         )
 
 
@@ -55,30 +68,44 @@ let mapStateToProps = (state) => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
-}
+};
 
+//Долгий способ прокидывания пропсов
 let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userId) => {
-            dispatch(followAC(userId))
+            dispatch(follow(userId))
         },
         unfollow: (userId) => {
-            dispatch(unfollowAC(userId))
+            dispatch(unfollow(userId))
         },
         setUsers: (users) => {
-            dispatch(setUsersAC(users));
+            dispatch(setUsers(users));
         },
         setCurrentPage: (currentPage) => {
-            dispatch(setCurrentPageAC(currentPage))
+            dispatch(setCurrentPage(currentPage))
         },
         setTotalUsersCount: (totalCount) =>{
-            dispatch(setTotalUsersCountAC(totalCount));
+            dispatch(setTotalUsersCount(totalCount));
+        },
+        Preload: (bool) =>{
+            dispatch(statePreload(bool));
         }
     }
 }
 
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps) (UsersAPIComponent);
+const UsersContainer = connect(mapStateToProps,
+    {
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        statePreload,
+    }
+    ) (UsersAPIComponent);
 export default UsersContainer;
