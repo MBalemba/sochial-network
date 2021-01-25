@@ -1,15 +1,19 @@
-import MyPosts from './MyPosts/MyPosts';
+
 import s from './Profile.module.css';
+import CreatePostContainer from "./CreatePost/CreatePostContainer";
+import PostContainer from "./Post/PostContainer";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = (props) => {
-    debugger;
+
   return (
     <div className= {s.content}>
-      <img class={s.img} src='https://i.ytimg.com/vi/-U0rlGJcgCw/maxresdefault.jpg' />
-      <MyPosts profilePage = {props.profilePage} dispatch = {props.dispatch} />
+        <ProfileInfo profile = {props.profile}/>
+        <CreatePostContainer/>
+        <PostContainer />
     </div>
   );
-}
+};
 
 
 export default Profile;

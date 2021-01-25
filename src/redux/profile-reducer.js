@@ -1,3 +1,6 @@
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
+
 const initialState = {
     posts: [
         {
@@ -28,48 +31,61 @@ const initialState = {
             messege: 'Hello'
         },
     ],
-    newPostText: 'post write now...'
+    newPostText: 'post write now...',
+    profile: {}
 }
 
 const profileReducer = (state = initialState, action) => {
-    if (action.type === 'ADD-POST') {
 
-        let newPost = {
-            name: "Макс Балемба",
-            id: "0",
-            srck: "https://sun1-92.userapi.com/impg/Aa9d2TJGoAIu89Q-RpSDKreTzPlDXkPaAZdL7A/LcFwPJVaTYA.jpg?size=100x0&quality=96&crop=558,189,953,953&sign=f4f26965a68cafa07dab7462ccfbb34e&ava=1",
-            messege: state.newPostText,
-        }
+    switch (action.type) {
+        case 'ADD-POST':
+            return {
+                ...state,
+                newPostText: '',
+                posts: [...state.posts, {
+                    name: "Макс Балемба",
+                    id: "0",
+                    srck: "https://sun1-92.userapi.com/impg/Aa9d2TJGoAIu89Q-RpSDKreTzPlDXkPaAZdL7A/LcFwPJVaTYA.jpg?size=100x0&quality=96&crop=558,189,953,953&sign=f4f26965a68cafa07dab7462ccfbb34e&ava=1",
+                    messege: state.newPostText,
+                }]
+            };
 
-        let stateCopy = {...state};
-        stateCopy.posts = [...state.posts];
-        stateCopy.posts.push(newPost);
-        stateCopy.newPostText = '';
-        return stateCopy;
-    } else if (action.type === 'UPDATE-NEW-TEXT') {
-        let stateCopy = {...state};
-        stateCopy.newPostText = action.newText;
-        return stateCopy;
+        case 'UPDATE-NEW-TEXT':
+            return {...state, newPostText: action.newText };
+
+        case SET_USER_PROFILE:
+            return {...state, profile: action.profile};
+
+        default:
+            return state;
+
     }
 
-    return state;
-
 }
+
+
+
+
+    export const addPostActionCreator = () => {
+        return {
+            type: 'ADD-POST'
+        }
+    }
+
+    export const updatePostTextActionCreator = (text) => {
+        return {
+            type: 'UPDATE-NEW-TEXT',
+            newText: text,
+        }
+    }
+
+    export const setUserProfile = (profile) => {
+        return {
+            type: SET_USER_PROFILE,
+            profile: profile,
+        }
+    }
+
 
 
 export default profileReducer;
-
-export const addPostActionCreator = () => {
-    return {
-        type: 'ADD-POST'
-    }
-}
-
-export const updatePostTextActionCreator = (text) => {
-    return {
-        type: 'UPDATE-NEW-TEXT',
-        newText: text,
-    }
-}
-
-

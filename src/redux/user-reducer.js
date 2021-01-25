@@ -14,7 +14,7 @@ const initialState = {
 }
 
 const usersReducer = (state = initialState, action) => {
-    debugger;
+
     switch (action.type) {
         case FOLLOW:
 
@@ -79,4 +79,5 @@ export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, current
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
 export const statePreload = (bool) => ({type: CHANGE_STATE_PRELOAD, isFetching: bool})
 export default usersReducer;
+
 

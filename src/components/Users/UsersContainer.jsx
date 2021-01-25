@@ -44,7 +44,7 @@ class UsersAPIComponent extends React.Component{
     render() {
         return (<>
 
-            {/*<Preloader isFetching = {this.props.isFetching}/>*/}
+            <Preloader isFetching = {this.props.isFetching}/>
             <Users totalUsersCount = { this.props.totalUsersCount}
                    pageSize = {this.props.pageSize}
                    currentPage = {this.props.currentPage}
