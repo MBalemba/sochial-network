@@ -4,39 +4,41 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    statePreload,
+    statePreload, toggleIsFollowingProgress,
     unfollow
 } from "../../redux/user-reducer";
 import {connect} from 'react-redux';
 import * as axios from 'axios';
 import Users from './Users';
-import preloader from '../../assets/image/loader.gif'
 import Preloader from "../common/Preloader";
+import {userAPI} from "../../api/api";
 
 class UsersAPIComponent extends React.Component{
 
     componentDidMount() {
         debugger
         this.props.statePreload(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${1}&count=${this.props.pageSize}`).then(response => {
+
+        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             debugger;
             this.props.statePreload(false);
-            console.log(response);
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);
+
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
         })
+
     }
 
     onPageChanges = (pageNumber) => {
         this.props.statePreload(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
 
             this.props.statePreload(false);
-            console.log(response)
-            this.props.setUsers(response.data.items);
+            this.props.setUsers(data.items);
 
         })
+
     }
 
 
@@ -52,6 +54,8 @@ class UsersAPIComponent extends React.Component{
                    users = {this.props.users}
                    follow = {this.props.follow}
                    unfollow = {this.props.unfollow}
+                   followingInProgress = {this.props.followingInProgress}
+                   toggleIsFollowingProgress = {this.props.toggleIsFollowingProgress}
 
             />
 
@@ -69,7 +73,8 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 };
 
@@ -106,6 +111,7 @@ const UsersContainer = connect(mapStateToProps,
         setCurrentPage,
         setTotalUsersCount,
         statePreload,
+        toggleIsFollowingProgress,
     }
     ) (UsersAPIComponent);
 export default UsersContainer;
