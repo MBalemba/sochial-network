@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-    follow,
+    buttonPressFollow,
+    follow, getUsers,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
@@ -16,28 +17,31 @@ import {userAPI} from "../../api/api";
 class UsersAPIComponent extends React.Component{
 
     componentDidMount() {
-        debugger
-        this.props.statePreload(true);
 
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            debugger;
-            this.props.statePreload(false);
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
 
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        })
+        // this.props.statePreload(true);
+        //
+        // userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //     this.props.statePreload(false);
+        //     this.props.setUsers(data.items);
+        //     this.props.setTotalUsersCount(data.totalCount);
+        // })
 
     }
 
     onPageChanges = (pageNumber) => {
-        this.props.statePreload(true);
-        this.props.setCurrentPage(pageNumber);
-        userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
 
-            this.props.statePreload(false);
-            this.props.setUsers(data.items);
-
-        })
+        this.props.getUsers(pageNumber, this.props.pageSize);
+        // this.props.setCurrentPage(pageNumber);
+        //
+        // this.props.statePreload(true);
+        // userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+        //
+        //     this.props.statePreload(false);
+        //     this.props.setUsers(data.items);
+        //
+        // })
 
     }
 
@@ -56,6 +60,7 @@ class UsersAPIComponent extends React.Component{
                    unfollow = {this.props.unfollow}
                    followingInProgress = {this.props.followingInProgress}
                    toggleIsFollowingProgress = {this.props.toggleIsFollowingProgress}
+                   buttonPressFollow = {this.props.buttonPressFollow}
 
             />
 
@@ -112,6 +117,8 @@ const UsersContainer = connect(mapStateToProps,
         setTotalUsersCount,
         statePreload,
         toggleIsFollowingProgress,
+        getUsers,
+        buttonPressFollow
     }
     ) (UsersAPIComponent);
 export default UsersContainer;
