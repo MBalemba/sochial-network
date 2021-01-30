@@ -1,3 +1,5 @@
+import {profileAPI} from "../api/api";
+
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 
@@ -84,6 +86,14 @@ const profileReducer = (state = initialState, action) => {
             type: SET_USER_PROFILE,
             profile: profile,
         }
+    }
+
+    export const dispatchProfileData = (useId) => {
+    return (dispatch) =>{
+        profileAPI.getProfileData(useId).then(response => {
+            dispatch(setUserProfile(response.data));
+        })
+    }
     }
 
 

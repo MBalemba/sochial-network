@@ -18,7 +18,8 @@ const App = (props)=> {
           <Route path='/Messages' render = { () => <DialogsContainer  dialogsPage={props.state.dialogsPage} dispatch = {props.dispatch}/>} />
           <Route path='/profile/:useId?' render = {() => <ProfileContainer profilePage ={props.state.profilePage} dispatch = {props.dispatch} />} />
           <Route exact path='/' render = {() => <ProfileContainer profilePage={props.state.profilePage} dispatch = {props.dispatch} />}/>
-          <Route exact path='/users' render = {() => <UsersContainer /> }/>
+          <Route path='/users' render = {() => <UsersContainer /> }/>
+          <Route path='/login' render = {() => <div>Your are not authorised</div>}/>
       </div>
 
     </div>

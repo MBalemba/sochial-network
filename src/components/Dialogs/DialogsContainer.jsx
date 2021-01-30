@@ -2,6 +2,10 @@ import BlockMessege from "./BlockMessege/BlockMessege";
 import {sendMessegeCreator, updateNewMassageBodyCreator} from "../../redux/dialog-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+import * as React from "react";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 //наша реализация контейнерной компоненты c прокидыванием пропсов через все древо без использования контекста
 // const DialogsContainer = (props) => {
@@ -55,6 +59,11 @@ let mapStateToProps = (state) => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs);
+// let AutRedirectComponent = withAuthRedirect(Dialogs);
+
+const DialogsContainer = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);
 
 export default DialogsContainer;

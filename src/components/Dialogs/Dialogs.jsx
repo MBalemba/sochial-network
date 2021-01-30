@@ -1,8 +1,6 @@
 import s from './Dialogs.module.css'
-import BlockMessege from "./BlockMessege/BlockMessege";
-import Post from "../Profile/Post/Post";
 import Search from "./search/search";
-import {sendMessegeCreator, updateNewMassageBodyCreator} from "../../redux/dialog-reducer";
+import {Redirect} from "react-router-dom"
 
 const Dialogs = (props) => {
 
@@ -17,6 +15,9 @@ const Dialogs = (props) => {
         props.NewMessageChange(body);
     }
 
+    if(!props.isAuth){
+        return <Redirect to = {"/login"} />
+    }
 
     return (
         <div className={s.grid}>
