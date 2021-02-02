@@ -1,7 +1,7 @@
 import {profileAPI} from "../api/api";
 
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
-
+const SET_STATUS = 'SET_STATUS';
 
 const initialState = {
     posts: [
@@ -34,7 +34,8 @@ const initialState = {
         },
     ],
     newPostText: 'post write now...',
-    profile: {}
+    profile: {},
+    status: null,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -56,7 +57,14 @@ const profileReducer = (state = initialState, action) => {
             return {...state, newPostText: action.newText };
 
         case SET_USER_PROFILE:
+
+            if(typeof action.profile === "string" || action.profile === null){
+
+                return {...state, status: action.profile}
+            }
             return {...state, profile: action.profile};
+        case  SET_STATUS:
+            return {...state, status: action.status}
 
         default:
             return state;
@@ -87,14 +95,39 @@ const profileReducer = (state = initialState, action) => {
             profile: profile,
         }
     }
+    export const setStatus = (status) => {
+
+        return {
+        type: SET_STATUS,
+        status:status
+    }
+    }
+
 
     export const dispatchProfileData = (useId) => {
     return (dispatch) =>{
+
         profileAPI.getProfileData(useId).then(response => {
             dispatch(setUserProfile(response.data));
         })
+        profileAPI.getProfileStatus(useId).then(response => {
+                dispatch(setUserProfile(response.data));//Сделал плохо, нужно было создать отдельный акшион и отдельно для него кейс блок
+        })
+
     }
     }
+
+export const updateStatus = (status) => {
+    return (dispatch) =>{
+
+        profileAPI.updateProfileStatus(status).then(response => {
+            if(response.data.resultCode ===0){
+                dispatch(setStatus(status));
+            }
+
+        })
+    }
+}
 
 
 

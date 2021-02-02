@@ -1,6 +1,6 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {dispatchProfileData, setUserProfile} from "../../redux/profile-reducer";
+import {dispatchProfileData, setUserProfile, updateStatus} from "../../redux/profile-reducer";
 import Profile from "./Profile";
 import {withRouter} from "react-router";
 import {profileAPI} from "../../api/api";
@@ -14,6 +14,7 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
       let useId = this.props.match.params.useId;
       this.props.dispatchProfileData(useId);
+
       // profileAPI.getProfileData(useId).then(response => {
       //     this.props.setUserProfile(response.data);
       // })
@@ -21,7 +22,7 @@ class ProfileContainer extends React.Component {
 
     render (){
     return(
-        <Profile {...this.props} profile = {this.props.profile}/>
+        <Profile {...this.props} status = {this.props.status} profile = {this.props.profile}/>
 
     )
   }
@@ -30,13 +31,14 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status,
 });
 
 
 
 
 export default compose(
-    connect(mapStateToProps, {setUserProfile, dispatchProfileData}),
+    connect(mapStateToProps, {setUserProfile, dispatchProfileData, updateStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer);

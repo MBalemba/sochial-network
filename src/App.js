@@ -6,6 +6,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 const App = (props)=> {
 
@@ -19,7 +20,7 @@ const App = (props)=> {
           <Route path='/profile/:useId?' render = {() => <ProfileContainer profilePage ={props.state.profilePage} dispatch = {props.dispatch} />} />
           <Route exact path='/' render = {() => <ProfileContainer profilePage={props.state.profilePage} dispatch = {props.dispatch} />}/>
           <Route path='/users' render = {() => <UsersContainer /> }/>
-          <Route path='/login' render = {() => <div>Your are not authorised</div>}/>
+          <Route path='/login' render = {() => <Login />}/>
       </div>
 
     </div>

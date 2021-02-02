@@ -8,12 +8,12 @@ const Profile = (props) => {
 
   return (
     <div className= {s.content}>
-        <ProfileInfo profile = {props.profile}/>
+        <ProfileInfo {...props} profile = {props.profile} status = {props.status}/>
         <CreatePostContainer/>
         <PostContainer />
     </div>
   );
-};
+}
 
 
 export default Profile;

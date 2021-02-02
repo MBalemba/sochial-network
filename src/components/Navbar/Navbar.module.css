@@ -6,3 +6,9 @@
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
   }
+
+.active{
+    background-color: rgba(199, 21, 133, 0.5);
+    margin: 0px 2px;
+    border-radius: 2px;
+}

@@ -26,13 +26,19 @@ export const userAPI = {
 
 export const profileAPI = {
     getProfileData: (useId) => {
-        return instance.get(`profile/${useId?useId:'2'}`)
+        return instance.get(`profile/${useId ? useId : '2'}`)
     },
-}
+    getProfileStatus: (useId) => {
+        return instance.get(`profile/status/${useId ? useId : '2'}`)
+    },
+    updateProfileStatus: (status) => {
+        return instance.put('profile/status', {status: status});
+    }
+};
 
 export const headerAPI = {
     getDataAuth: () => {
-        return instance.get('auth/me', )
+        return instance.get('auth/me',)
     }
 
 }

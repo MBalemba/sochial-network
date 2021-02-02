@@ -2,9 +2,22 @@ import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 
 const Navbar = () => {
+
+    let click = (e) => {
+        console.log(e.target.tagName);
+      if(e.target.tagName !== 'NAV'){
+          e.currentTarget.childNodes.forEach((el) => {
+              el.className = '';
+          })
+      }
+        if(e.target.tagName === 'A'){
+           e.target.parentNode.className = s.active;
+        }
+    }
+
   return (
-    <nav className = {s.nav}>
-      <div>
+    <nav onClick={click} className = {s.nav}>
+      <div className={s.active}>
         <NavLink to = "/Profile">Profile</NavLink>
       </div>
       <div>
