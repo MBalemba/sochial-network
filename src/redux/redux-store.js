@@ -11,6 +11,7 @@ let reducers = combineReducers({
     dialogsPage: dialogReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    form: formReducer,
     }
 )
 
