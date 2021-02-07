@@ -54,7 +54,7 @@ let mapStateToProps = (state) => {
     }
 },mapDispatchToProps = (dispatch) => {
     return {
-        SendMessageClick: () => { dispatch(sendMessegeCreator())},
+        SendMessageClick: (body) => { dispatch(sendMessegeCreator(body))},
         NewMessageChange: (body) => { dispatch(updateNewMassageBodyCreator(body));},
     }
 }

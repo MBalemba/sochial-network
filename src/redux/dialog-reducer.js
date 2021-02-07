@@ -33,7 +33,7 @@ const initialState = {
         {id: '3', message: 'wp'}
     ],
 
-    newMessageBody: ''
+    MessageBody: ''
 }
 
 const dialogReducer = (state = initialState, action) => {
@@ -48,8 +48,7 @@ const dialogReducer = (state = initialState, action) => {
     if (action.type === SEND_MESSAGE){
         return {
             ...state,
-            messegeContent: [...state.messegeContent, {id: '4', message: state.newMessageBody}],
-            newMessageBody: ''
+            messegeContent: [...state.messegeContent, {id: '4', message: action.MessageBody}],
         };
     }
 
@@ -59,7 +58,9 @@ const dialogReducer = (state = initialState, action) => {
 
 export default dialogReducer;
 
-export const sendMessegeCreator = () => ({type: SEND_MESSAGE})
+export const sendMessegeCreator = (Messege) => ({type: SEND_MESSAGE,
+    MessageBody: Messege,
+})
 
 export const updateNewMassageBodyCreator = (body) => {
     return {

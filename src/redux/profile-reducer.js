@@ -49,7 +49,7 @@ const profileReducer = (state = initialState, action) => {
                     name: "Макс Балемба",
                     id: "0",
                     srck: "https://sun1-92.userapi.com/impg/Aa9d2TJGoAIu89Q-RpSDKreTzPlDXkPaAZdL7A/LcFwPJVaTYA.jpg?size=100x0&quality=96&crop=558,189,953,953&sign=f4f26965a68cafa07dab7462ccfbb34e&ava=1",
-                    messege: state.newPostText,
+                    messege: action.newPostText,
                 }]
             };
 
@@ -76,9 +76,10 @@ const profileReducer = (state = initialState, action) => {
 
 
 
-    export const addPostActionCreator = () => {
+    export const addPostActionCreator = (newPostText) => {
         return {
-            type: 'ADD-POST'
+            type: 'ADD-POST',
+            newPostText: newPostText
         }
     }
 

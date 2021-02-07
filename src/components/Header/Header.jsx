@@ -4,7 +4,9 @@ import * as axios from "axios";
 
 const Header = (props) => {
 
-
+    const logoutClick =() => {
+        props.logout();
+    }
 
     return(
         <header className = {s.header}>
@@ -12,7 +14,10 @@ const Header = (props) => {
 
         <div className = {s.loginBlock}>
             {props.isAuth
-                ?  props.login
+                ?  (<div>
+                    {props.login}
+                    <button onClick={logoutClick}>logOut</button>
+                </div>)
                 :  <NavLink to={'/login'}>Login</NavLink>
             }
 

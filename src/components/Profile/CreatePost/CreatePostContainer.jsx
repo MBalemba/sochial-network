@@ -18,8 +18,8 @@ let mapStateToProps = (state) => {
             const newVar = updatePostTextActionCreator(text);
             dispatch(newVar);
         },
-        addPost: () => {
-            dispatch(addPostActionCreator());
+        addPost: (data) => {
+            dispatch(addPostActionCreator(data));
         },
     }
 }
