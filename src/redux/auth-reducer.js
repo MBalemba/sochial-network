@@ -1,4 +1,5 @@
 import {headerAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_IS_AUTH_FALSE = 'SET_IS_AUTH_FALSE';
@@ -6,7 +7,7 @@ const initialState = {
     id: null,
     email: null,
     login: null,
-    isAuth: true
+    isAuth: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -50,7 +51,7 @@ const setIsAuthFalse = () => ({
 
 
 export const resetUserData =() => (dispatch) => {
-    headerAPI.getDataAuth().then(response => {
+    return headerAPI.getDataAuth().then(response => {
         if(response.data.resultCode === 0){
             dispatch(setAuthUserData(response.data.data.id,
                 response.data.data.email,
@@ -66,6 +67,10 @@ export const login = (email, password, rememberMe) => (dispatch) => {
         .then(response => {
             if (response.data.resultCode === 0){
                 dispatch(resetUserData())
+            } else {
+                let message = response.data.messages.length>0 ? response.data.messages[0]: 'something is wrong';
+                let action = stopSubmit("login", {_error: message});
+                dispatch(action)
             }
         })
 }

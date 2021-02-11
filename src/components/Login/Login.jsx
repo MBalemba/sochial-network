@@ -40,6 +40,12 @@ const LoginForm = (props) => {
             <div>
                 <button>Login</button>
             </div>
+
+            {
+                props.error ?  <div>
+                    {props.error}
+                </div>: ''
+            }
         </form>
     )
 }
